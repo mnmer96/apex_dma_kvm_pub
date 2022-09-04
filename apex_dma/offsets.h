@@ -5,9 +5,9 @@
 
 #if VERSION == STEAM
 
-    #define OFFSET_ENTITYLIST			0x1a75038
+    #define OFFSET_ENTITYLIST			0x1a75038 //cl_entitylist
     #define OFFSET_LOCAL_ENT			0x1e25418 //LocalPlayer
-    #define OFFSET_NAME_LIST            0xba1e650
+    #define OFFSET_NAME_LIST            0xba1e650 //NameList
     #define OFFSET_THIRDPERSON          0x01a5a440 + 0x6c //thirdperson_override + 0x6c
     #define OFFSET_TIMESCALE            0x0141b2b0 //host_timescale
 
@@ -22,8 +22,17 @@
     #define OFFSET_THIRDPERSON_SV       0x3608 //m_thirdPersonShoulderView
     #define OFFSET_YAW                  0x2200 - 0x8 //m_currentFramePlayer.m_ammoPoolCount - 0x8
 
+    #define OFFSET_FLAGS		        0x0098 //m_fFlags
+    #define OFFSET_IN_FORWARD	        0x0759c0f8 //in_forward
+    #define OFFSET_IN_JUMP              0x0759c070 //in_jump
+    #define OFFSET_IN_DUCK              0x0ba1f098 //in_duck
+
+    #define OFFSET_SKIN			        0x0e48 //m_nSkin
+
     #define OFFSET_LIFE_STATE			0x798  //m_lifeState, >0 = dead
     #define OFFSET_BLEED_OUT_STATE		0x2688 //m_bleedoutState, >0 = knocked
+    #define OFFSET_SKYDIVE_STATE        0x45cc //m_skydiveState >0 = in skydive
+    
 
     #define OFFSET_ORIGIN				0x014c //m_vecAbsOrigin
     #define OFFSET_BONES				0x0e88 + 0x48 //m_nForceBone + 0x48
@@ -35,8 +44,8 @@
     #define OFFSET_OBSERVER_MODE		0x341c //m_iObserverMode
     #define OFFSET_OBSERVING_TARGET		0x3428 //m_hObserverTarget
 
-    #define OFFSET_MATRIX				0x11a210
-    #define OFFSET_RENDER				0x7599758
+    #define OFFSET_MATRIX				0x11a210 //ViewMatrix
+    #define OFFSET_RENDER				0x7599758 //ViewRender
 
     #define OFFSET_WEAPON				0x19ec //m_latestPrimaryWeapons
     #define OFFSET_BULLET_SPEED         0x1eb8 //CWeaponX!m_flProjectileSpeed
@@ -53,9 +62,9 @@
 
 #elif VERSION == ORIGIN
 
-    #define OFFSET_ENTITYLIST			0x1a75038
+    #define OFFSET_ENTITYLIST			0x1a75038 //cl_entitylist
     #define OFFSET_LOCAL_ENT			0x1e25418 //LocalPlayer
-    #define OFFSET_NAME_LIST            0xba1e650
+    #define OFFSET_NAME_LIST            0xba1e650 //NameList
     #define OFFSET_THIRDPERSON          0x01a5a440 + 0x6c //thirdperson_override + 0x6c
     #define OFFSET_TIMESCALE            0x0141b2b0 //host_timescale
 
@@ -70,8 +79,16 @@
     #define OFFSET_THIRDPERSON_SV       0x3608 //m_thirdPersonShoulderView
     #define OFFSET_YAW                  0x2200 - 0x8 //m_currentFramePlayer.m_ammoPoolCount - 0x8
 
+    #define OFFSET_FLAGS		        0x0098 //m_fFlags
+    #define OFFSET_IN_FORWARD	        0x0759c0f8 //in_forward
+    #define OFFSET_IN_JUMP              0x0759c070 //in_jump
+    #define OFFSET_IN_DUCK              0x0ba1f098 //in_duck
+
+    #define OFFSET_SKIN			        0x0e48 //m_nSkin
+
     #define OFFSET_LIFE_STATE			0x798  //m_lifeState, >0 = dead
     #define OFFSET_BLEED_OUT_STATE		0x2688 //m_bleedoutState, >0 = knocked
+    #define OFFSET_SKYDIVE_STATE        0x45cc //m_skydiveState >0 = in skydive
 
     #define OFFSET_ORIGIN				0x014c //m_vecAbsOrigin
     #define OFFSET_BONES				0x0e88 + 0x48 //m_nForceBone + 0x48
@@ -83,8 +100,8 @@
     #define OFFSET_OBSERVER_MODE		0x341c //m_iObserverMode
     #define OFFSET_OBSERVING_TARGET		0x3428 //m_hObserverTarget
 
-    #define OFFSET_MATRIX				0x11a210
-    #define OFFSET_RENDER				0x7599758
+    #define OFFSET_MATRIX				0x11a210 //ViewMatrix
+    #define OFFSET_RENDER				0x7599758 //ViewRender
 
     #define OFFSET_WEAPON				0x19ec //m_latestPrimaryWeapons
     #define OFFSET_BULLET_SPEED         0x1eb8 //CWeaponX!m_flProjectileSpeed

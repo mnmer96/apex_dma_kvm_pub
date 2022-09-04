@@ -58,6 +58,37 @@ void charge_rifle_hack(uint64_t entity_ptr)
 	}
 }
 
+void InState::update(uint32_t address)
+{
+	extern uint64_t g_Base;
+	apex_mem.Read(g_Base + address, button);
+	state = (button.state & 1) != 0;
+}
+
+void InState::post(uint32_t address)
+{
+	extern uint64_t g_Base;
+	// If active get the most recent state of the button
+	if (force && apex_mem.Read(g_Base + address, button))
+	{
+		// Get the desired state of the button
+		int state;
+		if (press && !release) {
+			state = 5;
+		}
+		else if (!press && release) {
+			state = 4;
+		}
+		else {
+			state = button.down[0] == 0 && button.down[1] == 0 ? 4 : 5;
+		}
+		// Gently tell the game to that nobody will be harmed if they just do as told
+		if (button.state != state) {
+			apex_mem.Write(g_Base + address + 8, state);
+		}
+	}
+}
+
 int Entity::getTeamId()
 {
 	return *(int*)(buffer + OFFSET_TEAM);
@@ -104,6 +135,19 @@ bool Entity::isKnocked()
 bool Entity::isAlive()
 {
 	return *(int*)(buffer + OFFSET_LIFE_STATE) == 0;
+}
+
+bool Entity::isOnGround() 
+{
+	uint32_t flags;
+	apex_mem.Read(ptr + OFFSET_FLAGS, flags);
+
+	return (flags & 0x1) != 0;
+}
+
+bool Entity::isInSkydive() 
+{
+	return *(int*)(buffer + OFFSET_SKYDIVE_STATE) > 0;
 }
 
 float Entity::lastVisTime()

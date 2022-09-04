@@ -25,6 +25,8 @@ public:
 	bool isPlayer();
 	bool isKnocked();
 	bool isAlive();
+	bool isOnGround();
+	bool isInSkydive();
 	float lastVisTime();
 	int getTeamId();
 	int getHealth();
@@ -86,6 +88,30 @@ struct ClientClass {
 	uint64_t pNext;
 	uint32_t ClassID;
 	uint32_t ClassSize;
+};
+
+struct kbutton_t
+{
+	int down[2];
+	int state;
+};
+
+struct InState
+{
+	// The raw button state.
+	kbutton_t button;
+
+	// True if the button is held down.
+	bool state;
+	// Set to true if the button should be overriden.
+	bool force;
+	// Force the button to be pressed.
+	bool press;
+	// Force the button to be released.
+	bool release;
+
+	void update(uint32_t address);
+	void post(uint32_t address);
 };
 
 Entity getEntity(uintptr_t ptr);
